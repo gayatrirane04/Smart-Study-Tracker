@@ -20,9 +20,15 @@ model User {
   email     String   @unique
   name      String?
   imageUrl String?
+  weight    Float?   // in kg
+  height    Float?   // in cm
+  age       Int?
+  gender    String?  // Male/Female
+  activityLevel String? // Sedentary/Light/Moderate/Active/Very Active
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Records   Record[]
+  JournalEntries JournalEntry[]
 }
 
 model Record {
@@ -32,6 +38,15 @@ model Record {
   date     DateTime @default(now())
   userId    String
   user      User     @relation(fields: [userId], references: [clerkUserId],  onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@index([userId])
+}
+
+model JournalEntry {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
   createdAt DateTime @default(now())
   @@index([userId])
 }

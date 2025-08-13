@@ -9,7 +9,7 @@ export default function Navbar() {
           <div className='flex items-center'>
             <Link href='/' className='flex-shrink-0'>
               <span className='text-md sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent'>
-                SleepTracker
+                studyManager
               </span>
             </Link>
           </div>
@@ -23,10 +23,17 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href='/about'
+              href='/analytics'
               className='text-gray-700 hover:text-purple-600 px-2 py-1 rounded-md text-sm sm:px-3 sm:py-2 sm:text-base font-medium '
             >
-              About
+              Analytics
+            </Link>
+
+            <Link
+              href='/journal'
+              className='text-gray-700 hover:text-purple-600 px-2 py-1 rounded-md text-sm sm:px-3 sm:py-2 sm:text-base font-medium '
+            >
+              Journal
             </Link>
 
             <SignedOut>

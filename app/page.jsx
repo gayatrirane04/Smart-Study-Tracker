@@ -1,16 +1,21 @@
 import AddNewRecord from '@/components/AddNewRecord';
 import AverageSleep from '@/components/AverageSleep';
-import BestWorstSleep from '@/components/BestWorstSleep';
 import Guest from '@/components/Guest';
 import RecordChart from '@/components/RecordChart';
-import RecordHistory from '@/components/RecordHistory';
 import { currentUser } from '@clerk/nextjs/server';
+import { db } from '@/lib/db';
 
 export default async function HomePage() {
   const user = await currentUser();
   if (!user) {
     return <Guest />;
   }
+
+  // Get latest record time
+  const latestRecord = await db.Record.findFirst({
+    where: { userId: user.id },
+    orderBy: { createdAt: 'desc' }
+  });
   return (
     <main className='bg-gray-100 text-gray-800 font-sans min-h-screen'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-8'>
@@ -40,11 +45,11 @@ export default async function HomePage() {
                 </p>
                 <p className='text-gray-600'>
                   <span className='font-semibold text-gray-800'>
-                    Last Active:
+                    Last Record Added:
                   </span>{' '}
-                  {user.lastActiveAt
-                    ? new Date(user.lastActiveAt).toLocaleString()
-                    : 'N/A'}
+                  {latestRecord
+                    ? new Date(latestRecord.createdAt).toLocaleString()
+                    : 'No records yet'}
                 </p>
               </div>
             </div>
@@ -58,13 +63,10 @@ export default async function HomePage() {
           {/* Placeholder for RecordStats, RecentRecord, and Insights */}
           <RecordChart />
           <AverageSleep />
-          <BestWorstSleep />
         </div>
       </div>
       {/* Placeholder for SleepHistory */}
-      <div className='max-w-7xl mx-auto'>
-        <RecordHistory />
-      </div>
+
     </main>
   );
 }

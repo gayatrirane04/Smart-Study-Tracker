@@ -37,7 +37,7 @@ function AddNewRecord() {
       <div className='bg-gray-100 flex items-center justify-center'>
       <div className='bg-white shadow-lg rounded-lg p-8 w-full'>
         <h3 className='text-2xl font-bold text-center mb-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent'>
-          Track Your Sleep
+          Track Your study
         </h3>
         <form
           ref={formRef}
@@ -55,7 +55,7 @@ function AddNewRecord() {
                 htmlFor='text'
                 className='block text-sm font-medium text-gray-700 mb-2'
               >
-                Sleep Quality
+                Study Quality
               </label>
                <select
                 id='text'
@@ -66,13 +66,13 @@ function AddNewRecord() {
                 required
               >
                 <option value='' disabled>
-                  Sleep quality...
+                  Quality...
                 </option>
-                <option value='Refreshed'>🌞 Refreshed</option>
+                <option value='Good'>🌞 Refreshed</option>
                 <option value='Tired'>😴 Tired</option>
                 <option value='Neutral'>😐 Neutral</option>
-                <option value='Exhausted'>😫 Exhausted</option>
-                <option value='Energetic'>⚡ Energetic</option>
+                <option value='poor'>😫 Exhausted</option>
+                <option value='Excellent'>⚡ Energetic</option>
               </select>
             </div>
 
@@ -81,7 +81,7 @@ function AddNewRecord() {
                 htmlFor='date'
                 className='block text-sm font-medium text-gray-700 mb-2'
               >
-                Sleep Date
+                 Date
               </label>
               <input
                 type='date'
@@ -100,7 +100,7 @@ function AddNewRecord() {
               htmlFor='amount'
               className='block text-sm font-medium text-gray-700 mb-2'
             >
-              Hours Slept
+              Hours Studied
               <br />
               <span className='text-xs text-gray-500'>
                 (Select between 0 and 12 in steps of 0.5)
@@ -147,7 +147,7 @@ function AddNewRecord() {
                 ></path>
               </svg>
             ) : (
-              'Add Sleep Record'
+              'Add Study Record'
             )}
           </button>
         </form>

@@ -8,10 +8,10 @@ const Footer = () => {
           {/* Logo and Tagline */}
           <div className='text-center md:text-left mb-4 md:mb-0'>
             <h2 className='text-lg font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent'>
-              SleepTracker
+              Study-Tracker
             </h2>
             <p className='text-gray-600 text-sm'>
-              Track your sleep, improve your health.
+              Track your study, improve ur habbits.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className='mt-8 text-center text-gray-500 text-sm'>
-          © {new Date().getFullYear()} SleepTracker. All rights reserved.
+          © {new Date().getFullYear()} Gayatri.Developer , All rights reserved.
         </div>
       </div>
     </footer>

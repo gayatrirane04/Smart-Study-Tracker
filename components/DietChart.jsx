@@ -3,15 +3,7 @@ import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
 export default function DietChart() {
-  const [data] = useState([
-    { day: 'Mon', calories: 2200, protein: 120, carbs: 250 },
-    { day: 'Tue', calories: 2100, protein: 110, carbs: 230 },
-    { day: 'Wed', calories: 2300, protein: 130, carbs: 270 },
-    { day: 'Thu', calories: 2000, protein: 100, carbs: 220 },
-    { day: 'Fri', calories: 2400, protein: 140, carbs: 280 },
-    { day: 'Sat', calories: 2500, protein: 150, carbs: 300 },
-    { day: 'Sun', calories: 2200, protein: 125, carbs: 260 }
-  ]);
+  const [data, setData] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,21 +23,33 @@ export default function DietChart() {
   });
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/user/profile');
-        const data = await response.json();
-        if (data.user) {
-          setUserProfile(data);
+        // Fetch user profile
+        const profileResponse = await fetch('/api/user/profile');
+        const profileData = await profileResponse.json();
+        if (profileData.user) {
+          setUserProfile(profileData);
+        }
+
+        // Fetch diet records
+        const dietResponse = await fetch('/api/diet');
+        const dietData = await dietResponse.json();
+        if (dietData.entries) {
+          const chartData = dietData.entries.map(entry => ({
+            day: new Date(entry.date).toLocaleDateString('en-US', { weekday: 'short' }),
+            calories: entry.amount || entry.calories
+          }));
+          setData(chartData);
         }
       } catch (error) {
-        console.error('Error fetching user profile:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserProfile();
+    fetchData();
   }, []);
 
   return (

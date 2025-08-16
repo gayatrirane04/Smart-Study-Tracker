@@ -9,7 +9,7 @@ export default function SleepChart() {
   useEffect(() => {
     const fetchSleepData = async () => {
       try {
-        const response = await fetch('/api/records');
+        const response = await fetch('/api/records?type=SLEEP');
         const result = await response.json();
         
         if (result.records) {

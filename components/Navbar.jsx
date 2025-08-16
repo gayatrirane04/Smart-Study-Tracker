@@ -9,7 +9,7 @@ export default function Navbar() {
           <div className='flex items-center'>
             <Link href='/' className='flex-shrink-0'>
               <span className='text-md sm:text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent'>
-                studyManager
+                StudyManager
               </span>
             </Link>
           </div>

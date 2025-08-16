@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
-export async function GET(request) {
+export async function GET() {
   try {
     const { userId } = await auth();
     
@@ -10,22 +10,19 @@ export async function GET(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type');
-
     const records = await db.Record.findMany({
       where: { 
-        userId,
-        type: type || 'STUDY'
+        userId: userId,
+        type: 'MOOD'
       },
       orderBy: { date: 'desc' },
       take: 7
     });
 
-    return NextResponse.json({ records });
+    return NextResponse.json({ entries: records });
   } catch (error) {
-    console.error('Error fetching records:', error);
-    return NextResponse.json({ error: 'Failed to fetch records' }, { status: 500 });
+    console.error('Error fetching mood data:', error);
+    return NextResponse.json({ error: 'Failed to fetch mood data' }, { status: 500 });
   }
 }
 
@@ -37,32 +34,32 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { type, amount } = await request.json();
+    const { rating } = await request.json();
     const today = new Date().toISOString().split('T')[0];
 
-    // Create or update today's record
+    // Create or update today's mood record
     await db.Record.upsert({
       where: {
         userId_date_type: {
           userId: userId,
           date: new Date(today),
-          type: type
+          type: 'MOOD'
         }
       },
       update: {
-        amount: parseFloat(amount)
+        amount: parseFloat(rating)
       },
       create: {
         userId: userId,
         date: new Date(today),
-        type: type,
-        amount: parseFloat(amount)
+        type: 'MOOD',
+        amount: parseFloat(rating)
       }
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error saving record:', error);
-    return NextResponse.json({ error: 'Failed to save record' }, { status: 500 });
+    console.error('Error saving mood:', error);
+    return NextResponse.json({ error: 'Failed to save mood' }, { status: 500 });
   }
 }

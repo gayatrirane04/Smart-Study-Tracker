@@ -4,6 +4,8 @@ import SleepChart from '@/components/SleepChart';
 import DietChart from '@/components/DietChart';
 import MentalHealthChart from '@/components/MentalHealthChart';
 import AnalyticsWrapper from '@/components/AnalyticsWrapper';
+import QuickInputFAB from '@/components/QuickInputFAB';
+import EditProfileButton from '@/components/EditProfileButton';
 
 export default async function AnalyticsPage() {
   const user = await currentUser();
@@ -23,6 +25,7 @@ export default async function AnalyticsPage() {
             <p className='text-lg text-gray-600'>
               Track your sleep patterns, diet, and mental health progress
             </p>
+            <EditProfileButton />
           </div>
           
           <div className='space-y-8'>
@@ -66,6 +69,7 @@ export default async function AnalyticsPage() {
           </div>
         </div>
       </main>
+      <QuickInputFAB />
     </AnalyticsWrapper>
   );
 }

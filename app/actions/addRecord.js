@@ -63,6 +63,7 @@ async function addSleepRecord(formData) {
       where: {
         userId,
         date: date,
+        type: 'STUDY'
       },
     });
 
@@ -91,6 +92,7 @@ async function addSleepRecord(formData) {
           amount,
           date,
           userId,
+          type: 'STUDY'
         },
       });
 

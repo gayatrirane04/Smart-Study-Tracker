@@ -31,14 +31,24 @@ model User {
   JournalEntries JournalEntry[]
 }
 
+enum RecordType {
+  SLEEP
+  DIET
+  MOOD
+  STUDY
+}
+
 model Record {
-  id        String   @id @default(uuid())
-  text     String
-  amount  Float
-  date     DateTime @default(now())
+  id        String     @id @default(uuid())
+  type      RecordType
+  text      String?
+  amount    Float
+  date      DateTime   @default(now())
   userId    String
-  user      User     @relation(fields: [userId], references: [clerkUserId],  onDelete: Cascade)
-  createdAt DateTime @default(now())
+  user      User       @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  
+  @@unique([userId, date, type])
   @@index([userId])
 }
 

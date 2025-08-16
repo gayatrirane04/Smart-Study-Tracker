@@ -48,6 +48,35 @@ export async function POST(request) {
   }
 }
 
+export async function PUT(request) {
+  try {
+    const { userId } = await auth();
+    
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { weight, height, age, gender, activityLevel } = await request.json();
+
+    // Update user profile in database
+    await db.User.update({
+      where: { clerkUserId: userId },
+      data: {
+        weight: parseFloat(weight),
+        height: parseFloat(height),
+        age: parseInt(age),
+        gender,
+        activityLevel
+      }
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    return NextResponse.json({ error: 'Failed to update profile' }, { status: 500 });
+  }
+}
+
 export async function GET() {
   try {
     const { userId } = await auth();

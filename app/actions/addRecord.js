@@ -3,7 +3,7 @@ import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
-async function addSleepRecord(formData) {
+async function addStudyRecord(formData) {
   const textValue = formData.get('text');
   const amountValue = formData.get('amount');
   const dateValue = formData.get('date');
@@ -114,5 +114,5 @@ async function addSleepRecord(formData) {
   }
 }
 
-export { addSleepRecord };
-export default addSleepRecord;
+export { addStudyRecord };
+export default addStudyRecord;

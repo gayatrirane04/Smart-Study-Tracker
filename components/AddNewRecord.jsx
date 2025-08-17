@@ -1,6 +1,6 @@
 'use client';
 import { useRef , useState } from 'react';
-import addRecord from '@/app/actions/addRecord';
+import addRecord from '@/app/actions/addRecord'; // importing the server
 
 
 function AddNewRecord() {
@@ -18,7 +18,7 @@ function AddNewRecord() {
      formData.set('amount', amount.toString()); // slider val tp form
      formData.set('text',sleepQuality); // quality val to form
      
-     const {error} = await addRecord(formData);
+     const {error} = await addRecord(formData); // calling the server action 
      if(error){
         setAlertMessage(`Error: ${error}`);
         setAlertType('error');

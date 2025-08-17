@@ -10,7 +10,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { weight, height, age, gender, activityLevel } = await request.json();
+    const { weight, height, age, gender, activityLevel , sleepGoal} = await request.json();
 
     // Ensure user exists in database
     let dbUser = await db.User.findUnique({
@@ -36,6 +36,7 @@ export async function POST(request) {
         weight: parseFloat(weight),
         height: parseFloat(height),
         age: parseInt(age),
+        sleepGoal: parseFloat(sleepGoal),
         gender,
         activityLevel
       }
@@ -56,7 +57,7 @@ export async function PUT(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { weight, height, age, gender, activityLevel } = await request.json();
+    const { weight, height, age, gender, activityLevel , sleepGoal} = await request.json();
 
     // Update user profile in database
     await db.User.update({
@@ -65,6 +66,7 @@ export async function PUT(request) {
         weight: parseFloat(weight),
         height: parseFloat(height),
         age: parseInt(age),
+        sleepGoal: parseFloat(sleepGoal),
         gender,
         activityLevel
       }
@@ -120,7 +122,7 @@ export async function GET() {
       });
     }
 
-    return NextResponse.json({ user });
+    return NextResponse.json({user});
   } catch (error) {
     console.error('Error fetching profile:', error);
     return NextResponse.json({ error: 'Failed to fetch profile' }, { status: 500 });

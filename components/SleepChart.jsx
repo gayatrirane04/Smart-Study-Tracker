@@ -1,33 +1,48 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,ReferenceLine ,ResponsiveContainer } from 'recharts';
 
 export default function SleepChart() {
+  const [userProfile, setUserProfile] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSleepData = async () => {
       try {
-        const response = await fetch('/api/records?type=SLEEP');
+        const response = await fetch('/api/sleep');
         const result = await response.json();
         
-        if (result.records) {
-          const chartData = result.records.slice(0, 7).map(record => ({
+        if (result.entries){
+          const chartData = result.entries.slice(0, 7).map(record => ({
             date: new Date(record.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
             hours: record.amount,
             quality: record.text
           }));
           setData(chartData.reverse());
         }
-      } catch (error) {
+        } catch (error) {
         console.error('Error fetching sleep data:', error);
       } finally {
         setLoading(false);
+      } 
+    };
+
+
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch('/api/user/profile');
+        const result = await response.json();
+        if (result.user) {
+          setUserProfile(result.user);
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
       }
     };
 
     fetchSleepData();
+    fetchUserProfile()
   }, []);
 
   if (loading) {
@@ -51,11 +66,22 @@ export default function SleepChart() {
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
-            <YAxis label={{ value: 'Hours', angle: -90, position: 'insideLeft' }} />
+            <YAxis 
+            domain={[0,userProfile?.sleepGoal ? userProfile.sleepGoal + 2 : 10]}
+            label={{ value: 'Hours', angle: -90, position: 'insideLeft' }} />
             <Tooltip 
               formatter={(value, name) => [value + ' hours', 'Sleep Duration']}
               labelFormatter={(label) => `Date: ${label}`}
             />
+             {userProfile?.sleepGoal && (
+             <ReferenceLine 
+              y={userProfile.sleepGoal} 
+              stroke="#10b981" 
+                strokeDasharray="5 5" 
+                label={{ value: `Goal: ${userProfile.sleepGoal}h`, position: 'topRight' }}
+                 />
+               )} 
+
             <Bar dataKey="hours" fill="#8b5cf6" radius={[4, 4, 0, 0]} maxBarSize={60} />
           </BarChart>
         </ResponsiveContainer>

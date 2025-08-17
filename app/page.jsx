@@ -1,5 +1,5 @@
 import AddNewRecord from '@/components/AddNewRecord';
-import AverageSleep from '@/components/AverageSleep';
+import AverageSleep from '@/components/AverageStudy';
 import Guest from '@/components/Guest';
 import RecordChart from '@/components/RecordChart';
 import { currentUser } from '@clerk/nextjs/server';

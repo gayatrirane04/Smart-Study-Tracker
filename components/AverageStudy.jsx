@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import getUserRecord from '@/app/actions/getUserRecords';
 
-const AverageSleep = () =>{
+const AverageStudy = () =>{
   const[hours,setHours] = useState(0);
   const[minutes,setMinutes] = useState(0);
   const[error,seterror] = useState(null);
@@ -13,9 +13,9 @@ const AverageSleep = () =>{
         const { record, daysWithRecords } = await getUserRecord();
         const validRecord = record || 0;
         const validDays = daysWithRecords && daysWithRecords > 0 ? daysWithRecords : 1;
-        const averageSleep = validRecord / validDays;
-        const hrs = Math.floor(averageSleep);
-        const mins = Math.round((averageSleep - hrs) * 60); 
+        const averageStudy = validRecord / validDays;
+        const hrs = Math.floor(averageStudy);
+        const mins = Math.round((averageStudy - hrs) * 60); 
         setHours(hrs);
         setMinutes(mins);
      
@@ -56,4 +56,4 @@ const AverageSleep = () =>{
   );
 };
 
-export default AverageSleep
+export default AverageStudy;

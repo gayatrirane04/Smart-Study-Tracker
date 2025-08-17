@@ -7,7 +7,8 @@ export default function UserProfileSetup({ onComplete }) {
     height: '',
     age: '',
     gender: '',
-    activityLevel: ''
+    activityLevel: '',
+    sleepGoal : ''
   });
   const [loading, setLoading] = useState(false);
 
@@ -113,6 +114,19 @@ export default function UserProfileSetup({ onComplete }) {
               <option value='Active'>Active (hard exercise 6-7 days/week)</option>
               <option value='Very Active'>Very Active (very hard exercise, physical job)</option>
             </select>
+          </div>
+
+           <div>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>
+              Sleep Goal (hours)
+            </label>
+            <input
+              type='number'
+              value={formData.sleepGoal}
+              onChange={(e) => setFormData({...formData, sleepGoal: e.target.value})}
+              className='w-full border border-gray-300 rounded-md px-3 py-2'
+              required
+            />
           </div>
 
           <button

@@ -24,6 +24,7 @@ model User {
   height    Float?   // in cm
   age       Int?
   gender    String?  // Male/Female
+  sleepGoal Float?     // in hour
   activityLevel String? // Sedentary/Light/Moderate/Active/Very Active
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

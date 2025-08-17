@@ -11,8 +11,13 @@ async function getUserRecord() {
   }
 
   try {
-    const records = await db.record.findMany({
-      where: { userId },
+    const records = await db.Record.findMany({
+      where: { userId ,
+        type : 'STUDY' ,
+        date:{
+          gte:new Date(Date.now()-7*24*60*60*1000)
+        }// Ensure we are fetching study records
+      },
     });
 
     const record = records.reduce((sum, record) => sum + record.amount, 0);

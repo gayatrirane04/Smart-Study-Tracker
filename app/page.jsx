@@ -1,5 +1,6 @@
 import AddNewRecord from '@/components/AddNewRecord';
 import AverageSleep from '@/components/AverageStudy';
+import AIInsights from '@/components/AIInsights';
 import Guest from '@/components/Guest';
 import RecordChart from '@/components/RecordChart';
 import { currentUser } from '@clerk/nextjs/server';
@@ -63,6 +64,7 @@ export default async function HomePage() {
           {/* Placeholder for RecordStats, RecentRecord, and Insights */}
           <RecordChart />
           <AverageSleep />
+          <AIInsights />
         </div>
       </div>
       {/* Placeholder for SleepHistory */}

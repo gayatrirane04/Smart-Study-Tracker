@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.29.0",
+    "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.13.0",
     "barchart": "^0.6.1",
     "next": "15.4.5",

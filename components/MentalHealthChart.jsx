@@ -72,7 +72,7 @@ export default function MentalHealthChart() {
       </div>
       
       <div className='mt-4 text-sm text-gray-600'>
-        <p>💡 Tip: Regular sleep and exercise can significantly improve mood and energy levels</p>
+        <p>Tip: Regular sleep and exercise can significantly improve mood and energy levels</p>
       </div>
     </div>
   );

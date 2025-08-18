@@ -88,19 +88,19 @@ export default function DietChart() {
       
       <div className='mt-4 space-y-2'>
         {userProfile?.dailyCalories ? (
-          <p className='text-sm text-gray-600'>🎯 Your daily calorie target: <strong>{userProfile.dailyCalories} calories</strong> (BMR: {userProfile.bmr})</p>
+          <p className='text-sm text-gray-600'>Your daily calorie should be below: <strong>{userProfile.dailyCalories} calories</strong> (BMR: {userProfile.bmr})</p>
         ) : (
-          <p className='text-sm text-gray-600'>💡 Complete your profile to see personalized calorie targets</p>
+          <p className='text-sm text-gray-600'>Complete your profile to see personalized calorie targets</p>
         )}
         
         <div className='flex gap-4 text-xs'>
           <div className='flex items-center gap-1'>
             <div className='w-3 h-3 bg-green-500 rounded'></div>
-            <span>Within Target</span>
+            <span>healthy</span>
           </div>
           <div className='flex items-center gap-1'>
             <div className='w-3 h-3 bg-red-500 rounded'></div>
-            <span>Over Target</span>
+            <span>Over eating</span>
           </div>
         </div>
       </div>

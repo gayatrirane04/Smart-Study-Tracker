@@ -78,12 +78,11 @@ function SleepQuickInput({ onClose }) {
     
     setSaving(true);
     try {
-      const response = await fetch('/api/records', {
+      const response = await fetch('/api/sleep', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          type: 'SLEEP',
-          amount: parseFloat(hours)
+          hours: parseFloat(hours)
         })
       });
       

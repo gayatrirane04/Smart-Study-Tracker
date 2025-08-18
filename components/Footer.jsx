@@ -40,7 +40,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className='mt-8 text-center text-gray-500 text-sm'>
-          © {new Date().getFullYear()} Gayatri.Developer , All rights reserved.
+          © {new Date().getFullYear()} Gayatri.Engineer , All rights reserved.
         </div>
       </div>
     </footer>
